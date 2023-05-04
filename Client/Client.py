@@ -25,7 +25,7 @@ def exportEmployeesToCsv():
 
 
 functions = {
-    0: testServer,
+    # 0: testServer,
     1: addEmployee,
     2: getEmployeeById,
     3: getEmployeeByName,
