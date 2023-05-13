@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Employee</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Add custom styles here if needed */
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+      }
+      h1 {
+        font-size: 32px;
+        color: #003366;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+      label {
+        font-size: 20px;
+        color: #666;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+      input[type="text"], input[type="radio"] {
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+      }
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+      input[type="submit"], button {
+        background-color: #003366;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 24px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      input[type="submit"]:hover, button:hover {
+        background-color: #0059b3;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>Add Employee</h1>
+    </center>
+    <form method="POST" action="/addEmployee">
+      <label>Name:</label>
+      <input type="text" name="name" required><br><br>
+
+      <label>Gender:</label>
+      <input type="radio" name="gender" value="male" required> Male
+      <input type="radio" name="gender" value="female" required> Female<br>
+
+      <label>Email:</label>
+      <input type="text" name="email" required><br>
+
+      <label>Age:</label>
+      <input type="text" name="age" required><br>
+
+      <label>Job:</label>
+      <input type="text" name="job" required><br>
+
+      <center>
+        <input type="submit" value="Add Employee">
+        <button onclick="window.location.href='http://127.0.0.1:5000/'">Home</button>
+      </center>
+    </form>
+  </body>
+</html>

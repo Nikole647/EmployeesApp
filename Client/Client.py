@@ -12,7 +12,8 @@ def main():
         functions[choice]() #סוגריים כדי לקרוא לזה כפונקציה מהמילון
 
 def testServer():
-    print(requests.get(url+"/test").text)
+    res = requests.get(url + '/test')
+    print(res.text)
 
 def printMenu():
     print("0.Test server")
@@ -28,21 +29,26 @@ def printMenu():
 
 
 def addEmployee():
-    details=input("Please enter: (id, firs name, last name,gender, age,salary,mail)").split(",")
-    newEmp=Employee(int(details[0]),details[1],details[2],details[3],float(details[4]),float(details[5]),details[6])
-    newEmpJson = json.dumps(newEmp)
-    requests.post(url+'/addEmployee',json=newEmpJson)
+    details = input("Please insert emp details: (id, first name, last name, gender, age, salary, email)\n").split(',')
+    newEmp = Employee(int(details[0]), details[1], details[2], details[3], float(details[4]), float(details[5]),
+                      details[6])
+    # newEmpJson = json.dumps(newEmp)
+    res = requests.post(url + '/addEmployee', json=newEmp.__dict__)
+    print(res.text)
 
 def getEmployeeById():
-    pass
+    empID = input("please insert employee`s id to show:\n")
+    print(requests.post(url + "/getEmployeeById/" + empID).text)
 def getEmployeeByName():
-    pass
+    empName = input("please insert employee`s name to show:\n")
+    print(requests.post(url + "/getEmployeeByName/" + empName).text)
 def getAllEmployees():
     pass
 def updateEmployee():
     pass
 def deleteEmployee():
-    pass
+    empId = input("Please insert employee's id to delete:\n")
+    print(requests.delete(url + '/deleteEmployee/' + empId).text)
 def importEmployeesFromCsv():
     pass
 def exportEmployeesToCsv():
@@ -64,5 +70,5 @@ functions = {
 
 
 if __name__ == "__main__":
-    testServer()
-    #123,nicole,gurevich,22,fghhhhy,jnkjnjn
+    main()
+    #123,nicole,gurevich,f,22,1234,jnkjnjn
