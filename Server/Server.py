@@ -92,13 +92,48 @@ def showemplist():
 
     # Render the template with the employee data
     return render_template("showEmployeeList.html", data=data)
-@app.route("/getEmployeeById/<empID>",methods=['POST'])
-def getEmployeeById(empID):
-    return "getting employee by ID :"+str(empID)
 
-@app.route("/getEmployeeByName/<empName>",methods=['POST'])
-def getEmployeeByName(empName):
-    return "getting employee by name :"+str(empName)
+@app.route("/edit/<int:employee_id>", methods=['GET', 'POST'])
+def edit_employee(employee_id):
+    # Connect to the database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        # Retrieve the updated employee information from the form
+        name = request.form['name']
+        gender = request.form['gender']
+        email = request.form['email']
+        age = request.form['age']
+        job = request.form['job']
+
+        # Update the employee record in the database
+        cursor.execute("UPDATE employees SET name=%s, gender=%s, email=%s, age=%s, job=%s WHERE id=%s",
+                       (name, gender, email, age, job, employee_id))
+        conn.commit()
+
+        # Retrieve the updated employee record from the database
+        cursor.execute("SELECT * FROM employees WHERE id=%s", (employee_id,))
+        employee = cursor.fetchone()
+
+        # Close the database connection
+        cursor.close()
+        conn.close()
+
+        # Render the template for employee list with the updated employee data
+        return render_template("showEmployeeList.html", data=[employee])
+
+    else:
+        # Retrieve the employee record from the database based on the employee_id
+        cursor.execute("SELECT * FROM employees WHERE id=%s", (employee_id,))
+        employee = cursor.fetchone()
+
+        # Close the database connection
+        cursor.close()
+        conn.close()
+
+        # Render the template for employee editing
+        return render_template("editEmployee.html", employee=employee)
 
 
 
