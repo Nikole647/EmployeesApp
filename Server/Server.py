@@ -32,7 +32,8 @@ def addEmployee():
         # Insert new employee into database
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO employees (name, gender, email, age, job) VALUES (%s, %s, %s, %s, %s)", (name, gender, email, age, job))
+        cursor.execute("INSERT INTO employees (name, gender, email, age, job) VALUES (%s, %s, %s, %s, %s)",
+                       (name, gender, email, age, job))
         conn.commit()
         cursor.close()
         conn.close()
